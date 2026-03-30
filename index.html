@@ -31,45 +31,83 @@
     .masthead-nav a { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .masthead-nav a:hover { color: var(--ink); }
 
-    /* SECTION RULE */
-    .section-rule { padding: 6px 48px; border-bottom: 1px solid var(--rule); }
+    /* FRONT PAGE */
+    .front-page { padding: 40px 0 0; border-bottom: 1px solid var(--rule); }
 
-    /* HERO */
-    .hero {
-      padding: 40px 48px 56px;
+    /* DATELINE */
+    .dateline {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      padding: 0 48px 10px;
       border-bottom: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
     }
 
-    /* JUSTIFIED HEADLINE */
-    .hero-headline {
+    /* HEADLINE */
+    .front-headline {
       font-family: var(--display);
+      font-size: clamp(2rem, 4.2vw, 4.8rem);
       line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      width: 100%;
+      display: block;
+      border-bottom: 2px solid var(--ink);
+      padding: 12px 48px 16px;
+    }
+
+    /* BYLINE ROW */
+    .byline-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 48px 16px;
+      margin-top: 0;
+    }
+
+    .byline-main {
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
       color: var(--ink);
     }
-    .hero-headline .line {
-      display: block;
-      width: 100%;
-      font-size: clamp(3rem, 6.5vw, 7rem);
-      letter-spacing: normal;
-      white-space: nowrap;
-      transform-origin: left center;
-    }
-    .hero-headline .red { color: var(--red); }
 
-    .hero-byline { padding-left: 20px; border-left: 2px solid var(--red); margin-top: 28px; }
-    .hero-byline-main { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 6px; }
-    .hero-byline-sub { font-family: var(--serif); font-style: italic; font-size: 0.78rem; line-height: 1.6; color: var(--muted); }
+    .byline-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
 
     /* GIF GRID */
     .gif-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 6px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 3px;
+      position: relative;
+      padding: 0 48px;
+    }
+
+    /* GRAIN OVERLAY on the whole grid */
+    .gif-grid::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+    }
+
+    .gif-item {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--ink);
     }
 
     .gif-cell {
@@ -85,20 +123,43 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: grayscale(100%);
-      transition: filter 0.4s ease, transform 0.4s ease;
+      filter: grayscale(100%) sepia(15%) brightness(92%) contrast(92%);
+      transition: filter 0.5s ease, transform 0.5s ease;
     }
 
-    .gif-cell:hover img {
-      filter: grayscale(0%);
-      transform: scale(1.04);
+    .gif-item:hover .gif-cell img {
+      filter: grayscale(0%) sepia(0%) brightness(100%) contrast(100%);
+      transform: scale(1.03);
+    }
+
+    .gif-caption {
+      padding: 5px 7px 6px;
+      border-top: 1px solid var(--rule);
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .gif-caption-brand {
+      font-family: var(--display);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+
+    .gif-caption-campaign {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.58rem;
+      color: var(--muted);
     }
 
     /* WORK ROWS */
     .work-header { padding: 10px 48px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr 80px; gap: 24px; }
     .work-header span { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .work-header span:last-child { text-align: right; }
-
     .work-row { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 24px; align-items: center; padding: 0 48px; border-bottom: 1px solid var(--rule); cursor: pointer; text-decoration: none; color: var(--ink); position: relative; overflow: hidden; min-height: 88px; }
     .work-row::before { content: ''; position: absolute; inset: 0; background: var(--ink); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); z-index: 0; }
     .work-row:hover::before { transform: translateX(0); }
@@ -128,53 +189,91 @@
 
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
-      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
     </div>
   </div>
 
   <header class="masthead">
     <div class="masthead-meta">Copywriter&nbsp;&nbsp;·&nbsp;&nbsp;New York</div>
-    <a class="masthead-name" href="index.html">MARCO MOSCA</a>
-    <nav><ul class="masthead-nav"><li><a href="#work">Work</a></li><li><a href="about.html">About</a></li></ul></nav>
+    <a class="masthead-name" href="about.html">MARCO MOSCA</a>
+    <nav><ul class="masthead-nav"><li><a href="#work">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
   </header>
 
-  <div class="section-rule"></div>
-
-  <section class="hero">
-    <div class="hero-left">
-      <h1 class="hero-headline">
-        <span class="line" id="line1">ADS PEOPLE</span>
-        <span class="line" id="line2"><span class="red">FORGOT</span></span>
-        <span class="line" id="line3">TO SKIP</span>
-      </h1>
-      <div class="hero-byline">
-        <p class="hero-byline-main">By Marco</p>
-        <p class="hero-byline-sub">(& a multitude of majorly talented, mildly disgruntled A.Ds.)</p>
+  <div class="front-page">
+    <div class="dateline" id="dateline"></div>
+    <h1 class="front-headline">'ENTERTAINMENT' STOCKS PLUMMET AS PUBLIC DEMANDS <span style="color:var(--red)">MORE ADS</span></h1>
+    <div class="byline-row">
+      <div>
+        <span class="byline-main">By Marco</span><br>
+        <span class="byline-sub">(& a multitude of majorly talented, mildly disgruntled A.Ds.)</span>
       </div>
     </div>
 
     <div class="gif-grid">
-      <a href="nike.html" class="gif-cell">
-        <img src="STILLCOUNTS.gif" alt="Nike — Still Counts">
-      </a>
-      <a href="tubi.html" class="gif-cell">
-        <img src="TUBI.gif" alt="Tubi — Transmission Error">
-      </a>
-      <a href="duolingo.html" class="gif-cell">
-        <img src="DUOMODE.gif" alt="Duolingo — DuoMode">
-      </a>
-      <a href="roomba.html" class="gif-cell">
-        <img src="ROOMBA.gif" alt="Roomba — Roomba ID">
-      </a>
-      <a href="bubly.html" class="gif-cell">
-        <img src="BUBLY.gif" alt="Bubly — Where's Apple?">
-      </a>
-      <a href="home-depot.html" class="gif-cell">
-        <img src="HOMEDEPOT.gif" alt="Home Depot — DIY Summer Studio">
-      </a>
+
+      <div class="gif-item">
+        <a href="nike.html" class="gif-cell">
+          <img src="STILLCOUNTS.gif" alt="Nike">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Nike</span>
+          <span class="gif-caption-campaign">Still Counts</span>
+        </div>
+      </div>
+
+      <div class="gif-item">
+        <a href="tubi.html" class="gif-cell">
+          <img src="TUBI.gif" alt="Tubi">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Tubi</span>
+          <span class="gif-caption-campaign">Transmission Error</span>
+        </div>
+      </div>
+
+      <div class="gif-item">
+        <a href="duolingo.html" class="gif-cell">
+          <img src="DUOMODE.gif" alt="Duolingo">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Duolingo</span>
+          <span class="gif-caption-campaign">DuoMode</span>
+        </div>
+      </div>
+
+      <div class="gif-item">
+        <a href="roomba.html" class="gif-cell">
+          <img src="ROOMBA.gif" alt="Roomba">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Roomba</span>
+          <span class="gif-caption-campaign">Roomba ID</span>
+        </div>
+      </div>
+
+      <div class="gif-item">
+        <a href="bubly.html" class="gif-cell">
+          <img src="BUBLY.gif" alt="Bubly">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Bubly</span>
+          <span class="gif-caption-campaign">Where's Apple?</span>
+        </div>
+      </div>
+
+      <div class="gif-item">
+        <a href="whiskas.html" class="gif-cell">
+          <img src="WHISKAS.gif" alt="Whiskas">
+        </a>
+        <div class="gif-caption">
+          <span class="gif-caption-brand">Whiskas</span>
+          <span class="gif-caption-campaign">Purrformance Fuel</span>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
 
   <section id="work">
     <div class="work-header">
@@ -205,9 +304,9 @@
       <div class="row-desc">Where's Apple?</div>
       <div class="row-num">05</div>
     </a>
-    <a href="home-depot.html" class="work-row fade-in">
-      <div class="row-brand">HOME DEPOT</div>
-      <div class="row-desc">DIY Summer Studio</div>
+    <a href="whiskas.html" class="work-row fade-in">
+      <div class="row-brand">WHISKAS</div>
+      <div class="row-desc">Purrformance Fuel</div>
       <div class="row-num">06</div>
     </a>
   </section>
@@ -221,21 +320,11 @@
   </footer>
 
   <script>
-    function fitLines() {
-      const headline = document.querySelector('.hero-headline');
-      if (!headline) return;
-      const containerWidth = headline.offsetWidth;
-      const lines = headline.querySelectorAll('.line');
-      lines.forEach(line => {
-        line.style.fontSize = '';
-        const naturalWidth = line.scrollWidth;
-        const scale = containerWidth / naturalWidth;
-        line.style.fontSize = (parseFloat(getComputedStyle(line).fontSize) * scale) + 'px';
-      });
-    }
-    window.addEventListener('load', fitLines);
-    window.addEventListener('resize', fitLines);
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const now = new Date();
+    const dateStr = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+    document.getElementById('dateline').innerHTML = 'New York, N.Y.&nbsp;&nbsp;·&nbsp;&nbsp;' + dateStr + '&nbsp;&nbsp;·&nbsp;&nbsp;Est. 1995';
   </script>
-
 </body>
 </html>
