@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Marco Mosca — Copywriter</title>
+  <title>Tagline — Marco Mosca</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,99 +26,119 @@
     /* MASTHEAD */
     .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--bg); z-index: 50; }
     .masthead-meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-    .masthead-name { font-family: var(--display); font-size: 2.4rem; letter-spacing: 0.08em; text-align: center; text-decoration: none; color: var(--ink); }
+    .masthead-name { font-family: var(--display); font-size: 2.8rem; letter-spacing: 0.1em; text-align: center; text-decoration: none; color: var(--ink); }
     .masthead-nav { display: flex; gap: 32px; justify-content: flex-end; list-style: none; }
     .masthead-nav a { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .masthead-nav a:hover { color: var(--ink); }
 
-    /* FRONT PAGE */
-    .front-page { padding: 40px 0 0; border-bottom: 1px solid var(--rule); }
+    /* FRONT PAGE WRAPPER */
+    .front-page { padding: 0; border-bottom: 1px solid var(--rule); }
 
     /* DATELINE */
-    .dateline {
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-      padding: 0 48px 10px;
-      border-bottom: 1px solid var(--rule);
-    }
+    .dateline { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding: 12px 48px 10px; border-bottom: 1px solid var(--rule); }
 
     /* HEADLINE */
     .front-headline {
       font-family: var(--display);
-      font-size: clamp(2rem, 4.5vw, 5.1rem);
+      font-size: 4.5vw;
       line-height: 0.95;
       letter-spacing: -0.01em;
       color: var(--ink);
-      width: 100%;
       display: block;
       border-bottom: 2px solid var(--ink);
-      padding: 12px 48px 16px;
+      padding: 12px 48px 14px;
     }
 
-    /* BYLINE ROW */
-    .byline-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 12px 48px 16px;
-      margin-top: 0;
-    }
+    /* BYLINE */
+    .byline-row { padding: 8px 48px 10px; border-bottom: 1px solid var(--rule); text-align: right; }
+    .byline-main { font-family: var(--display); font-size: 1rem; letter-spacing: 0.06em; color: var(--ink); display: block; }
+    .byline-sub { font-family: var(--serif); font-style: italic; font-size: 0.72rem; line-height: 1.5; color: var(--muted); display: block; margin-top: 1px; }
 
-    .byline-main {
-      font-family: var(--display);
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-    }
-
-    .byline-sub {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    /* GIF GRID */
-    .gif-grid {
+    /* MAIN LAYOUT — broadsheet style */
+    .broadsheet {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 3px;
-      position: relative;
+      grid-template-columns: 1fr 1fr 1fr 220px;
+      grid-template-rows: auto auto;
+      border-bottom: 1px solid var(--rule);
       padding: 0 48px;
     }
 
-    /* GRAIN OVERLAY on the whole grid */
-    .gif-grid::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 3;
-      opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 128px 128px;
+    /* TABLE OF CONTENTS SIDEBAR */
+    .toc {
+      grid-column: 4;
+      grid-row: 1 / 3;
+      border-left: 1px solid var(--rule);
+      padding: 20px 20px 24px;
+      position: sticky;
+      top: 72px;
+      align-self: start;
     }
 
-    .gif-item {
+    .toc-heading {
+      font-family: var(--display);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .toc-item {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .toc-item:hover { color: var(--red); }
+
+    .toc-brand {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .toc-credits {
+      font-size: 0.55rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .toc-page {
+      font-family: var(--display);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ARTICLE CELLS */
+    .article {
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
       display: flex;
       flex-direction: column;
-      border: 1px solid var(--ink);
     }
 
-    .gif-cell {
+    .article:last-of-type { border-right: none; }
+
+    .article-img {
       display: block;
       overflow: hidden;
       position: relative;
-      aspect-ratio: 16/9;
       background: var(--ink);
     }
 
-    .gif-cell img {
+    .article-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -127,60 +147,102 @@
       transition: filter 0.5s ease, transform 0.5s ease;
     }
 
-    .gif-item:hover .gif-cell img {
+    .article:hover .article-img img {
       filter: grayscale(0%) sepia(0%) brightness(100%) contrast(100%);
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
 
-    .gif-caption {
-      padding: 5px 7px 6px;
-      border-top: 1px solid var(--rule);
-      background: var(--bg);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
+    .article-body { padding: 12px 16px 16px; flex: 1; }
 
-    .gif-caption-brand {
-      font-family: var(--display);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      color: var(--ink);
+    .article-dateline {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-    }
-
-    .gif-caption-campaign {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 0.58rem;
       color: var(--muted);
+      margin-bottom: 5px;
     }
 
-    /* WORK ROWS */
-    .work-header { padding: 10px 48px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr 80px; gap: 24px; }
-    .work-header span { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .work-header span:last-child { text-align: right; }
-    .work-row { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 24px; align-items: center; padding: 0 48px; border-bottom: 1px solid var(--rule); cursor: pointer; text-decoration: none; color: var(--ink); position: relative; overflow: hidden; min-height: 88px; }
-    .work-row::before { content: ''; position: absolute; inset: 0; background: var(--ink); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1); z-index: 0; }
-    .work-row:hover::before { transform: translateX(0); }
-    .work-row:hover .row-brand, .work-row:hover .row-desc, .work-row:hover .row-num { color: var(--bg); }
-    .row-brand { font-family: var(--display); font-size: 2rem; letter-spacing: 0.06em; position: relative; z-index: 1; transition: color 0.3s; }
-    .row-desc { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; position: relative; z-index: 1; transition: color 0.3s; }
-    .row-num { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); text-align: right; position: relative; z-index: 1; transition: color 0.3s; }
+    .article-headline {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 7px;
+    }
 
-    /* FADE IN */
-    .fade-in { opacity: 0; transform: translateY(16px); animation: fadeUp 0.6s ease forwards; }
-    .fade-in:nth-child(1) { animation-delay: 0.05s; }
-    .fade-in:nth-child(2) { animation-delay: 0.12s; }
-    .fade-in:nth-child(3) { animation-delay: 0.19s; }
-    .fade-in:nth-child(4) { animation-delay: 0.26s; }
-    .fade-in:nth-child(5) { animation-delay: 0.33s; }
-    .fade-in:nth-child(6) { animation-delay: 0.40s; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .article-copy {
+      font-size: 0.72rem;
+      line-height: 1.7;
+      color: #4a4845;
+      margin-bottom: 10px;
+    }
+
+    .article-readmore {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      text-decoration: none;
+      font-family: var(--display);
+    }
+
+    .article-readmore:hover { text-decoration: underline; }
+
+    /* ROW 1: Nike spans 2 cols, Tubi 1 col — Row 2: Duolingo 1, Roomba 1, Whiskas + HomeDepot stacked in col 3 */
+
+    .article-nike {
+      grid-column: 1 / 3;
+      grid-row: 1;
+    }
+
+    .article-nike .article-img { aspect-ratio: 16/7; }
+
+    .article-tubi {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .article-tubi .article-img { aspect-ratio: 4/3; }
+
+    .article-duolingo {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .article-duolingo .article-img { height: 260px; }
+
+    .article-whiskas-main {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .article-whiskas-main .article-img { height: 260px; }
+
+    /* Roomba and Home Depot stacked in col 3, row 2 */
+    .col3-stack {
+      grid-column: 3;
+      grid-row: 2;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+    }
+
+    .article-roomba, .article-home-depot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-roomba { border-bottom: 1px solid var(--rule); }
+
+    .article-roomba .article-img { aspect-ratio: 16/7; }
+    .article-home-depot .article-img { aspect-ratio: 16/7; }
 
     /* FOOTER */
     .footer { padding: 28px 48px; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: center; }
-    .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+    .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
     .footer-quote cite { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; color: var(--red); }
     .footer-right { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.8; }
   </style>
@@ -189,134 +251,156 @@
 
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
-      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>BUBLY</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
     </div>
   </div>
 
   <header class="masthead">
-    <div class="masthead-meta">Copywriter&nbsp;&nbsp;·&nbsp;&nbsp;New York</div>
-    <a class="masthead-name" href="about.html">MARCO MOSCA</a>
-    <nav><ul class="masthead-nav"><li><a href="#work">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
+    <div class="masthead-meta">Marco Mosca&nbsp;&nbsp;·&nbsp;&nbsp;Copywriter</div>
+    <a class="masthead-name" href="index.html">TAGLINE</a>
+    <nav><ul class="masthead-nav"><li><a href="index.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
   </header>
 
   <div class="front-page">
     <div class="dateline" id="dateline"></div>
     <h1 class="front-headline">'ENTERTAINMENT' STOCKS PLUMMET AS PUBLIC DEMANDS <span style="color:var(--red)">MORE ADS</span></h1>
     <div class="byline-row">
-      <div>
-        <span class="byline-main">By Marco</span><br>
-        <span class="byline-sub">(& a multitude of majorly talented, mildly disgruntled A.Ds.)</span>
-      </div>
+      <span class="byline-main">By Marco</span>
+      <span class="byline-sub">(& a multitude of majorly talented, mildly disgruntled A.Ds.)</span>
     </div>
 
-    <div class="gif-grid">
+    <div class="broadsheet">
 
-      <div class="gif-item">
-        <a href="nike.html" class="gif-cell">
+      <!-- NIKE — wide lead story -->
+      <article class="article article-nike">
+        <a href="nike.html" class="article-img">
           <img src="STILLCOUNTS.gif" alt="Nike">
         </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Nike</span>
-          <span class="gif-caption-campaign">Still Counts</span>
+        <div class="article-body">
+          <div class="article-dateline">New York, NY</div>
+          <div class="article-headline">Nike Moves the Unmoved Generation</div>
+          <p class="article-copy">As idealistic advertising draws eye rolls and head shakes across the country, the timeless sportswear brand is breaking through to Gen-Z with a sim…</p>
+          <a href="nike.html" class="article-readmore">Cont'd pg. 6 →</a>
         </div>
-      </div>
+      </article>
 
-      <div class="gif-item">
-        <a href="tubi.html" class="gif-cell">
+      <!-- TUBI — right of Nike -->
+      <article class="article article-tubi">
+        <a href="tubi.html" class="article-img">
           <img src="TUBI.gif" alt="Tubi">
         </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Tubi</span>
-          <span class="gif-caption-campaign">Transmission Error</span>
+        <div class="article-body">
+          <div class="article-dateline">Flyover, USA</div>
+          <div class="article-headline">Crop Circles Leave Americans Smug, Confused, Intrigued</div>
+          <p class="article-copy">As the country grapples with the implications of potentially alien communications, streaming giant Tubi has remained suspiciously silen…</p>
+          <a href="tubi.html" class="article-readmore">Cont'd pg. 8 →</a>
         </div>
-      </div>
+      </article>
 
-      <div class="gif-item">
-        <a href="duolingo.html" class="gif-cell">
+      <!-- TABLE OF CONTENTS -->
+      <aside class="toc">
+        <div class="toc-heading">Index</div>
+
+        <a href="nike.html" class="toc-item">
+          <span class="toc-brand">Nike</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Marco</span>
+          <span class="toc-page">Pg. 6</span>
+        </a>
+
+        <a href="tubi.html" class="toc-item">
+          <span class="toc-brand">Tubi</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Lauren T, Nick A, Annie Y.</span>
+          <span class="toc-page">Pg. 8</span>
+        </a>
+
+        <a href="duolingo.html" class="toc-item">
+          <span class="toc-brand">Duolingo</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Grecia R.</span>
+          <span class="toc-page">Pg. 11</span>
+        </a>
+
+        <a href="roomba.html" class="toc-item">
+          <span class="toc-brand">Roomba</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Christina C.</span>
+          <span class="toc-page">Pg. 15</span>
+        </a>
+
+        <a href="whiskas.html" class="toc-item">
+          <span class="toc-brand">Whiskas</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Fiona H.</span>
+          <span class="toc-page">Pg. 19</span>
+        </a>
+
+        <a href="home-depot.html" class="toc-item">
+          <span class="toc-brand">Home Depot</span>
+          <span class="toc-credits">CW: Marco &nbsp;·&nbsp; AD: Lauren T, Nick A.</span>
+          <span class="toc-page">Pg. 22</span>
+        </a>
+      </aside>
+
+      <!-- DUOLINGO -->
+      <article class="article article-duolingo">
+        <a href="duolingo.html" class="article-img">
           <img src="DUOMODE.gif" alt="Duolingo">
         </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Duolingo</span>
-          <span class="gif-caption-campaign">DuoMode</span>
+        <div class="article-body">
+          <div class="article-dateline">Our Heads, Rent Free</div>
+          <div class="article-headline">Duolingo Creates Unforgettable Reminder</div>
+          <p class="article-copy">Despite the success of the popular language app, studies continue to show that the best way to learn a language is through full immers…</p>
+          <a href="duolingo.html" class="article-readmore">Cont'd pg. 11 →</a>
         </div>
-      </div>
+      </article>
 
-      <div class="gif-item">
-        <a href="roomba.html" class="gif-cell">
-          <img src="ROOMBA.gif" alt="Roomba">
-        </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Roomba</span>
-          <span class="gif-caption-campaign">Roomba ID</span>
-        </div>
-      </div>
-
-      <div class="gif-item">
-        <a href="bubly.html" class="gif-cell">
-          <img src="BUBLY.gif" alt="Bubly">
-        </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Bubly</span>
-          <span class="gif-caption-campaign">Where's Apple?</span>
-        </div>
-      </div>
-
-      <div class="gif-item">
-        <a href="whiskas.html" class="gif-cell">
+      <!-- WHISKAS — centered, col 2 -->
+      <article class="article article-whiskas-main">
+        <a href="whiskas.html" class="article-img">
           <img src="WHISKAS.gif" alt="Whiskas">
         </a>
-        <div class="gif-caption">
-          <span class="gif-caption-brand">Whiskas</span>
-          <span class="gif-caption-campaign">Purrformance Fuel</span>
+        <div class="article-body">
+          <div class="article-dateline">Search Results, The Internet</div>
+          <div class="article-headline">Cat Food Brand Turns Typos to Traffic</div>
+          <p class="article-copy">Despite Whiskas continuing to battle false allegations (see: Does Whiskas Really Kill Cats?) their new AOR has found a way to stand out in a satur…</p>
+          <a href="whiskas.html" class="article-readmore">Cont'd pg. 19 →</a>
         </div>
+      </article>
+
+      <!-- ROOMBA + HOME DEPOT stacked in col 3 -->
+      <div class="col3-stack">
+        <article class="article article-roomba">
+          <a href="roomba.html" class="article-img">
+            <img src="ROOMBA.gif" alt="Roomba">
+          </a>
+          <div class="article-body">
+            <div class="article-dateline">Hardwood Floors, Home Interiors</div>
+            <div class="article-headline">Robot Reprograms, Redecorates</div>
+            <p class="article-copy">It's not the robot takeover we deserve— but it's the one many homes needed. Roomba impressed this year by using imaging technology to…</p>
+            <a href="roomba.html" class="article-readmore">Cont'd pg. 15 →</a>
+          </div>
+        </article>
+
+        <article class="article article-home-depot">
+          <a href="home-depot.html" class="article-img">
+            <img src="HOMEDEPOT.gif" alt="Home Depot">
+          </a>
+          <div class="article-body">
+            <div class="article-dateline">Young Homeowners, Just Kidding</div>
+            <div class="article-headline">Young Renters Find Aesthetic & Economic Relief in DIY</div>
+            <p class="article-copy">As costs continue to rise, one orange brand is stepping in to ease one orange man's economic burden on young Americans. This Summer, Home Dep…</p>
+            <a href="home-depot.html" class="article-readmore">Cont'd pg. 22 →</a>
+          </div>
+        </article>
       </div>
 
     </div>
   </div>
-
-  <section id="work">
-    <div class="work-header">
-      <span>Brand</span><span>Campaign</span><span style="text-align:right">No.</span>
-    </div>
-    <a href="nike.html" class="work-row fade-in">
-      <div class="row-brand">NIKE</div>
-      <div class="row-desc">Still Counts</div>
-      <div class="row-num">01</div>
-    </a>
-    <a href="tubi.html" class="work-row fade-in">
-      <div class="row-brand">TUBI</div>
-      <div class="row-desc">Transmission Error</div>
-      <div class="row-num">02</div>
-    </a>
-    <a href="duolingo.html" class="work-row fade-in">
-      <div class="row-brand">DUOLINGO</div>
-      <div class="row-desc">DuoMode</div>
-      <div class="row-num">03</div>
-    </a>
-    <a href="roomba.html" class="work-row fade-in">
-      <div class="row-brand">ROOMBA</div>
-      <div class="row-desc">Roomba ID</div>
-      <div class="row-num">04</div>
-    </a>
-    <a href="bubly.html" class="work-row fade-in">
-      <div class="row-brand">BUBLY</div>
-      <div class="row-desc">Where's Apple?</div>
-      <div class="row-num">05</div>
-    </a>
-    <a href="whiskas.html" class="work-row fade-in">
-      <div class="row-brand">WHISKAS</div>
-      <div class="row-desc">Purrformance Fuel</div>
-      <div class="row-num">06</div>
-    </a>
-  </section>
 
   <footer class="footer">
     <div class="footer-quote">
       "Let us prove to the world that good taste, good art and good writing can be good selling."
       <cite>— Bill Bernbach</cite>
     </div>
-    <div class="footer-right">Marco Mosca<br>Copywriter · New York<br>© 2026</div>
+    <div class="footer-right">Tagline<br>© <span id="footer-year"></span></div>
   </footer>
 
   <script>
@@ -325,6 +409,8 @@
     const now = new Date();
     const dateStr = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
     document.getElementById('dateline').innerHTML = 'New York, N.Y.&nbsp;&nbsp;·&nbsp;&nbsp;' + dateStr + '&nbsp;&nbsp;·&nbsp;&nbsp;Est. 1995';
+    document.getElementById('footer-year').textContent = now.getFullYear();
   </script>
+
 </body>
 </html>
