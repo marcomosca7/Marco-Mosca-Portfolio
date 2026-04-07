@@ -5,66 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Duolingo — Tagline</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0e0e0e;
+      --ink: #f0ece3;
+      --muted: #8a8680;
+      --red: #c0392b;
+      --rule: rgba(240,236,227,0.12);
+      --display: 'Bebas Neue', sans-serif;
+      --serif: 'Libre Baskerville', Georgia, serif;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); min-height: 100vh; overflow-x: hidden; }
+
+    .ticker { background: var(--ink); color: var(--bg); overflow: hidden; white-space: nowrap; padding: 8px 0; font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em; }
+    .ticker-track { display: inline-flex; animation: ticker 28s linear infinite; }
+    .ticker-track span { padding: 0 36px; }
+    .ticker-track .sep { color: var(--red); padding: 0; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--bg); z-index: 50; }
+    .masthead-meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .masthead-name { font-family: var(--display); font-size: 2.8rem; letter-spacing: 0.1em; text-align: center; text-decoration: none; color: var(--ink); transition: opacity 0.3s ease, font-size 0.3s ease; }
+    .masthead-name.hidden { opacity: 0; pointer-events: none; font-size: 0; }
+    .masthead-nav { display: flex; gap: 32px; justify-content: flex-end; list-style: none; }
+    .masthead-nav a { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .masthead-nav a:hover { color: var(--ink); }
+
+    .campaign-header { padding: 64px 80px 56px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .campaign-num { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 16px; }
+    .campaign-brand { font-family: var(--display); font-size: clamp(5rem, 12vw, 11rem); line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); }
+    .campaign-logo { height: 72px; width: auto; opacity: 0.85; filter: invert(1) brightness(0.9); align-self: flex-end; }
+
+    .campaign-intro { padding: 56px 80px; border-bottom: 1px solid var(--rule); max-width: 1200px; }
+    .campaign-intro p { font-size: 1.05rem; line-height: 1.95; color: var(--ink); margin-bottom: 1.1em; }
+    .campaign-intro p:last-child { margin-bottom: 0; }
+    .campaign-intro strong { font-weight: 700; }
+
+    .phase-block { border-bottom: 1px solid var(--rule); }
+    .phase-header { padding: 40px 80px 24px; }
+    .phase-label { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.18em; color: var(--red); margin-bottom: 8px; }
+    .phase-heading { font-family: var(--display); font-size: 2rem; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 12px; }
+    .phase-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); max-width: 860px; }
+
+    .img-full { width: 100%; display: block; }
+    .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; }
+    .img-grid-2 img { width: 100%; height: 100%; object-fit: cover; display: block; border-right: 1px solid var(--rule); }
+    .img-grid-2 img:last-child { border-right: none; }
+
+    .closing-block { padding: 56px 80px; border-bottom: 1px solid var(--rule); }
+    .closing-line { font-style: italic; font-size: 1.05rem; line-height: 1.85; color: var(--ink); }
+
+    .credits-block { padding: 20px 80px; border-bottom: 1px solid var(--rule); }
+    .credits { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+
+    .campaign-nav { position: sticky; bottom: 0; z-index: 40; background: var(--bg); display: flex; justify-content: space-between; padding: 24px 80px; border-top: 1px solid var(--rule); }
+    .campaign-nav a { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); padding: 10px 20px; transition: background 0.2s, color 0.2s; }
+    .campaign-nav a:hover { background: var(--ink); color: var(--bg); }
+
+    .footer { padding: 28px 80px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+    .footer-quote cite { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; color: var(--red); }
+    .footer-right { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.8; }
+  </style>
 </head>
 <body>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span></div></div>
-  <header class="masthead">
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+    </div>
+  </div>
+
+  <header class="masthead" id="masthead">
     <div class="masthead-meta">Marco Mosca&nbsp;&nbsp;·&nbsp;&nbsp;Copywriter</div>
-    <a class="masthead-name" href="index.html">TAGLINE</a>
+    <a class="masthead-name" id="masthead-name" href="index.html">TAGLINE</a>
     <nav><ul class="masthead-nav"><li><a href="index.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
   </header>
 
-  <section class="campaign-header">
-    <span class="campaign-num">Pg. 11</span>
-    <div class="campaign-brand">DUOLINGO</div>
+  <section class="campaign-header" id="campaign-header">
+    <div>
+      <span class="campaign-num">Pg. 11</span>
+      <div class="campaign-brand">DUOLINGO</div>
+    </div>
+    <img class="campaign-logo" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Duolingo_logo.svg" alt="Duolingo">
   </section>
 
-  <div class="campaign-body">
-    <div class="intro-text">
-      <p>Everything on your phone is designed to steal your attention away from everything else.</p>
-      <p><strong>Why compete?</strong></p>
-      <p>We decided to take over the distractions entirely.</p>
-    </div>
+  <div class="campaign-intro">
+    <p>Everything on your phone is designed to steal your attention away from everything else.</p>
+    <p><strong>Why compete?</strong></p>
+    <p>We decided to take over the distractions entirely.</p>
+  </div>
 
-    <div class="section-block">
-      <div class="section-label">The Idea</div>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/93c1067d-a713-4581-b6c1-5cb8a27afd52/DUOMODE+LOGO+W+TAG.png" alt="DuoMode Logo">
-      <p class="section-text">Every day, Duo the Owl will invade your phone and translate the entire thing into the language you're studying. That means socials, messages, games — everything.</p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/87a10ecf-597b-4b7a-94fe-7980847b568d/dm+apps.png" alt="DuoMode Apps">
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/23f00958-764a-4ccf-8d80-ba3084bd98c9/dm+activado2.png" alt="DuoMode Activated">
-      <p class="section-text"><strong>Want your phone back? Just do your damn Duolingo.</strong></p>
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">The Idea</div>
+      <div class="phase-heading">DuoMode</div>
+      <p class="phase-text">Every day, Duo the Owl will invade your phone and translate the entire thing into the language you're studying. That means socials, messages, games — everything.</p>
     </div>
-
-    <div class="section-block">
-      <div class="section-label">Out of Home</div>
-      <div class="img-grid-2">
-        <img src="https://static1.squarespace.com/static/67c90996bb19bc22c144ea6c/t/6920cf700668ab75906b77c9/1763757939989/AVOIDING-US-SUBWAY.jpg" alt="Subway OOH">
-        <img src="https://static1.squarespace.com/static/67c90996bb19bc22c144ea6c/t/6920cfab9a0dab2dc5844816/1763757999587/AVOIDING-US-BILLBOARD.jpg" alt="Billboard OOH">
-      </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/93c1067d-a713-4581-b6c1-5cb8a27afd52/DUOMODE+LOGO+W+TAG.png" alt="DuoMode Logo">
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/87a10ecf-597b-4b7a-94fe-7980847b568d/dm+apps.png" alt="DuoMode Apps">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/23f00958-764a-4ccf-8d80-ba3084bd98c9/dm+activado2.png" alt="DuoMode Activated">
     </div>
+    <div class="phase-header">
+      <p class="phase-text"><strong>Want your phone back? Just do your damn Duolingo.</strong></p>
+    </div>
+  </div>
 
-    <div class="section-block">
-      <div class="section-label">Features</div>
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">Out of Home</div>
+    </div>
+    <img class="img-full" src="https://static1.squarespace.com/static/67c90996bb19bc22c144ea6c/t/6920cf700668ab75906b77c9/1763757939989/AVOIDING-US-SUBWAY.jpg" alt="Subway OOH">
+    <img class="img-full" src="https://static1.squarespace.com/static/67c90996bb19bc22c144ea6c/t/6920cfab9a0dab2dc5844816/1763757999587/AVOIDING-US-BILLBOARD.jpg" alt="Billboard OOH">
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">Features</div>
       <div class="phase-heading">Streaksaver</div>
-      <p class="section-text">For every hour spent on DuoMode, you'll build a buffer that protects your streak.</p>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/87725880-c1c2-4d46-801c-28b1b3f08b20/streaksaver.png" alt="Streaksaver">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/027faed3-1557-45e3-86f9-28f878c4534e/block.png" alt="DuoBlock">
-      </div>
-      <div class="phase-heading">DuoBlock</div>
-      <p class="section-text">Once you've embraced the spirit of DuoMode, get a DuoBlock to complete your immersive language learning adventure. When scanned, DuoBlock will translate every single device on your home's wifi to the language you're studying.</p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/1b88fbdf-c985-462f-9d56-688a4618b601/iPhone+Taking+a+Picture+Mockup.png" alt="Scanning DuoBlock">
+      <p class="phase-text">For every hour spent on DuoMode, you'll build a buffer that protects your streak.</p>
     </div>
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/87725880-c1c2-4d46-801c-28b1b3f08b20/streaksaver.png" alt="Streaksaver">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/027faed3-1557-45e3-86f9-28f878c4534e/block.png" alt="DuoBlock">
+    </div>
+    <div class="phase-header">
+      <div class="phase-heading">DuoBlock</div>
+      <p class="phase-text">Once you've embraced the spirit of DuoMode, get a DuoBlock to complete your immersive language learning adventure. When scanned, DuoBlock will translate every single device on your home's wifi to the language you're studying.</p>
+    </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/1b88fbdf-c985-462f-9d56-688a4618b601/iPhone+Taking+a+Picture+Mockup.png" alt="Scanning DuoBlock">
+  </div>
 
-    <div class="closing-line">Instead of competing with the distractions, we embraced them — letting users experience real language immersion in the environment where they're most comfortable: their phones.</div>
+  <div class="closing-block" style="text-align:center;">
+    <p class="closing-line">Instead of competing with the distractions, we embraced them — letting users experience real language immersion in the environment where they're most comfortable: their phones.</p>
+  </div>
+
+  <div class="credits-block">
     <div class="credits">Art Direction — Grecia Rivera</div>
   </div>
 
   <div class="campaign-nav"><a href="tubi.html">← Tubi</a><a href="index.html">Home</a><a href="whiskas.html">Whiskas →</a></div>
+
   <footer class="footer">
     <div class="footer-quote">"Let us prove to the world that good taste, good art and good writing can be good selling."<cite>— Bill Bernbach</cite></div>
     <div class="footer-right">A Tagline Publication<br>© 2026</div>
   </footer>
+
+  <script>
+    const mastheadName = document.getElementById('masthead-name');
+    const campaignHeader = document.getElementById('campaign-header');
+    const campaignNav = document.querySelector('.campaign-nav');
+    const footer = document.querySelector('.footer');
+
+    const footerObserver = new IntersectionObserver(([entry]) => {
+      campaignNav.style.position = entry.isIntersecting ? 'static' : 'sticky';
+    }, { threshold: 0 });
+    footerObserver.observe(footer);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > campaignHeader.offsetTop + campaignHeader.offsetHeight) {
+        mastheadName.classList.add('hidden');
+      } else {
+        mastheadName.classList.remove('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>

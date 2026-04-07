@@ -8,11 +8,11 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #0e0e0e;
-      --ink: #f0ece3;
+      --bg: #f0ece3;
+      --ink: #111010;
       --muted: #8a8680;
       --red: #c0392b;
-      --rule: rgba(240,236,227,0.12);
+      --rule: rgba(17,16,16,0.15);
       --display: 'Bebas Neue', sans-serif;
       --serif: 'Libre Baskerville', Georgia, serif;
     }
@@ -25,7 +25,7 @@
     .ticker-track .sep { color: var(--red); padding: 0; }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--bg); z-index: 50; }
+    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--bg); z-index: 50; }
     .masthead-meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
     .masthead-name { font-family: var(--display); font-size: 2.8rem; letter-spacing: 0.1em; text-align: center; text-decoration: none; color: var(--ink); transition: opacity 0.3s ease, font-size 0.3s ease; }
     .masthead-name.hidden { opacity: 0; pointer-events: none; font-size: 0; }
@@ -36,7 +36,7 @@
     .campaign-header { padding: 64px 80px 56px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
     .campaign-num { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 16px; }
     .campaign-brand { font-family: var(--display); font-size: clamp(5rem, 12vw, 11rem); line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); }
-    .campaign-logo { height: 72px; width: auto; opacity: 0.85; filter: invert(1) brightness(0.9); align-self: flex-end; }
+    .campaign-logo { height: 72px; width: auto; opacity: 0.85; align-self: flex-end; }
 
     .campaign-intro { padding: 56px 80px; border-bottom: 1px solid var(--rule); max-width: 1200px; }
     .campaign-intro p { font-size: 1.05rem; line-height: 1.95; color: var(--ink); margin-bottom: 1.1em; }
@@ -66,7 +66,7 @@
     .campaign-nav a { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); padding: 10px 20px; transition: background 0.2s, color 0.2s; }
     .campaign-nav a:hover { background: var(--ink); color: var(--bg); }
 
-    .footer { padding: 28px 80px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    .footer { padding: 28px 80px; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: center; }
     .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
     .footer-quote cite { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; color: var(--red); }
     .footer-right { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.8; }
@@ -140,7 +140,7 @@
     </video>
   </div>
 
-  <div class="closing-block" style="text-align:center; padding:56px 160px;">
+  <div class="closing-block" style="text-align:center; padding:56px 240px;">
     <p class="closing-line">In an oversaturated streaming market, Tubi found a way to stand out — turning consumer skepticism about "free" into a brand moment that reinforced quality, quantity, and, of course, gratuity.</p>
   </div>
 
