@@ -5,75 +5,200 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Depot — Tagline</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f0ece3;
+      --ink: #111010;
+      --muted: #8a8680;
+      --red: #c0392b;
+      --rule: rgba(17,16,16,0.15);
+      --display: 'Bebas Neue', sans-serif;
+      --serif: 'Libre Baskerville', Georgia, serif;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); min-height: 100vh; overflow-x: hidden; }
+
+    .ticker { background: var(--ink); color: var(--bg); overflow: hidden; white-space: nowrap; padding: 8px 0; font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em; }
+    .ticker-track { display: inline-flex; animation: ticker 28s linear infinite; }
+    .ticker-track span { padding: 0 36px; }
+    .ticker-track .sep { color: var(--red); padding: 0; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--bg); z-index: 50; }
+    .masthead-meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .masthead-name { font-family: var(--display); font-size: 2.8rem; letter-spacing: 0.1em; text-align: center; text-decoration: none; color: var(--ink); transition: opacity 0.3s ease, font-size 0.3s ease; }
+    .masthead-name.hidden { opacity: 0; pointer-events: none; font-size: 0; }
+    .masthead-nav { display: flex; gap: 32px; justify-content: flex-end; list-style: none; }
+    .masthead-nav a { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .masthead-nav a:hover { color: var(--ink); }
+
+    .campaign-header { padding: 64px 80px 56px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .campaign-num { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 16px; }
+    .campaign-brand { font-family: var(--display); font-size: clamp(5rem, 12vw, 11rem); line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); }
+
+    .campaign-intro { padding: 56px 80px; border-bottom: 1px solid var(--rule); max-width: 1200px; }
+    .campaign-intro p { font-size: 1.05rem; line-height: 1.95; color: var(--ink); opacity: 0.85; margin-bottom: 1.1em; }
+    .campaign-intro p:last-child { margin-bottom: 0; }
+    .campaign-intro strong { font-weight: 700; }
+
+    .phase-block { border-bottom: 1px solid var(--rule); }
+    .phase-header { padding: 40px 80px 24px; }
+    .phase-label { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.18em; color: var(--red); margin-bottom: 8px; }
+    .phase-heading { font-family: var(--display); font-size: 2rem; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 12px; }
+    .phase-text { font-size: 0.95rem; line-height: 1.85; color: var(--ink); opacity: 0.75; max-width: 860px; }
+
+    .img-full { width: 100%; display: block; padding: 12px 80px; }
+    .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; padding: 12px 80px; gap: 12px; }
+    .img-grid-2 img { width: 100%; display: block; }
+
+    .video-full { width: 100%; display: block; padding: 12px 80px; }
+    .video-full video { width: 100%; display: block; }
+
+    .closing-block { padding: 56px 80px; border-bottom: 1px solid var(--rule); }
+    .closing-line { font-style: italic; font-size: 1.05rem; line-height: 1.85; color: var(--ink); }
+
+    .credits-block { padding: 20px 80px; border-bottom: 1px solid var(--rule); }
+    .credits { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+
+    .campaign-nav { position: sticky; bottom: 0; z-index: 40; background: var(--bg); display: flex; justify-content: space-between; padding: 24px 80px; border-top: 1px solid var(--rule); }
+    .campaign-nav a { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); padding: 10px 20px; transition: background 0.2s, color 0.2s; }
+    .campaign-nav a:hover { background: var(--ink); color: var(--bg); }
+
+    .footer { padding: 28px 80px; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: center; }
+    .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+    .footer-quote cite { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; color: var(--red); }
+    .footer-right { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.8; }
+  </style>
 </head>
 <body>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span></div></div>
-  <header class="masthead">
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+    </div>
+  </div>
+
+  <header class="masthead" id="masthead">
     <div class="masthead-meta">Marco Mosca&nbsp;&nbsp;·&nbsp;&nbsp;Copywriter</div>
-    <a class="masthead-name" href="index.html">TAGLINE</a>
+    <a class="masthead-name" id="masthead-name" href="index.html">TAGLINE</a>
     <nav><ul class="masthead-nav"><li><a href="index.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
   </header>
 
-  <section class="campaign-header">
-    <span class="campaign-num">Pg. 22</span>
-    <div class="campaign-brand">HOME DEPOT</div>
+  <section class="campaign-header" id="campaign-header">
+    <div>
+      <span class="campaign-num">Pg. 22</span>
+      <div class="campaign-brand">HOME DEPOT</div>
+    </div>
   </section>
 
-  <div class="campaign-body">
-    <div class="intro-text">
-      <p>Home ownership is on the decline. It's hard for young professionals to justify buying the nice, expensive furniture they might want.</p>
-      <p>The Home Depot's <strong>DIY Summer Studio</strong> lets you build the furniture you want for cheaper, while adding your own personal touch — turning "someday" furniture into "I built this" furniture.</p>
-    </div>
+  <div class="campaign-intro">
+    <p>Home ownership is on the decline. It's hard for young professionals to justify buying the nice, expensive furniture they might want.</p>
+    <p>The Home Depot's <strong>DIY Summer Studio</strong> lets you build the furniture you want for cheaper, while adding your own personal touch — turning "someday" furniture into "I built this" furniture.</p>
+  </div>
 
-    <div class="section-block">
-      <div class="section-label">The Campaign</div>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/037f28e7-3d64-4e75-84ee-4a2a43fe6973/Tagline.jpg" alt="DIY Summer Studio">
+  <!-- THE CAMPAIGN -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">The Campaign</div>
     </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/037f28e7-3d64-4e75-84ee-4a2a43fe6973/Tagline.jpg" alt="DIY Summer Studio">
+  </div>
 
-    <div class="section-block">
+  <!-- VIDEO WALKTHROUGH -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">Summer Studio Walkthrough</div>
+    </div>
+    <div class="video-full">
+      <video loop playsinline controls>
+        <source src="originals/home-depot/Summer Studio Walkthrough.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- PHASE 01 -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">Phase 01</div>
       <div class="phase-heading">Out-of-Home</div>
-      <p class="section-text">Transit benches and other outdoor placements are designed to trigger a single question: <strong>"Could I actually build this?"</strong> A scannable code takes people straight into DIY Summer Studio, where step-by-step guidance and Home Depot materials make the answer feel like a confident "yes."</p>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c913737c-19ac-4595-9531-f3e8ffaed02a/Bench_Mock.png" alt="Transit Bench">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/3c51f2a8-b09c-4c42-a623-8d2bae4752f9/Table_Sticker+copy+%281%29.jpg" alt="Table Sticker">
-      </div>
+      <p class="phase-text">Transit benches and other outdoor placements are designed to trigger a single question: <strong>"Could I actually build this?"</strong> A scannable code takes people straight into DIY Summer Studio, where step-by-step guidance and Home Depot materials make the answer feel like a confident "yes."</p>
     </div>
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c913737c-19ac-4595-9531-f3e8ffaed02a/Bench_Mock.png" alt="Transit Bench">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/3c51f2a8-b09c-4c42-a623-8d2bae4752f9/Table_Sticker+copy+%281%29.jpg" alt="Table Sticker">
+    </div>
+  </div>
 
-    <div class="section-block">
+  <!-- PHASE 02 -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">Phase 02</div>
       <div class="phase-heading">The Buildability Plug-In</div>
-      <p class="section-text">Fans of DIY Summer Studio can download the <strong>Buildability Plug-In</strong> for their browsers. The extension scans product pages and moodboards across the internet and flags anything that could be turned into a DIY project with The Home Depot — surfacing materials, tools, estimated time, and a direct link to open it as a project inside DIY Summer Studio.</p>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c777cdf9-ffa7-47a2-b023-8d506da0c9e2/plugin+explained+comp.png" alt="Plugin Explained">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/70160314-9d43-4d4a-87f9-9b4a081406dd/plugin+comp.png" alt="Plugin Interface">
-      </div>
+      <p class="phase-text">Fans of DIY Summer Studio can download the <strong>Buildability Plug-In</strong> for their browsers. The extension scans product pages and moodboards across the internet and flags anything that could be turned into a DIY project with The Home Depot — surfacing materials, tools, estimated time, and a direct link to open it as a project inside DIY Summer Studio.</p>
     </div>
-
-    <div class="section-block">
-      <div class="section-label">Partnerships</div>
-      <p class="section-text">Home Depot partnered with DIY content creators like Simone Giertz to get real reactions to our exclusive Summer DIY shed.</p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/239b2012-8ebd-46fc-a089-387ffa258e3e/Simone+Giertz+no+bg.jpg" alt="Simone Giertz">
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c777cdf9-ffa7-47a2-b023-8d506da0c9e2/plugin+explained+comp.png" alt="Plugin Explained">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/70160314-9d43-4d4a-87f9-9b4a081406dd/plugin+comp.png" alt="Plugin Interface">
     </div>
+  </div>
 
-    <div class="section-block">
-      <div class="section-label">Microsite</div>
-      <p class="section-text">QR codes lead to the DIY Summer Studio — a site that recognizes photos of furniture and provides instructions and a list of materials to build it, available for purchase at The Home Depot.</p>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/7298bf21-c94d-4b10-b004-d67dddc1c9e3/Screenshot+2025-03-13+at+7.45.01%E2%80%AFPM.png" alt="Microsite 1">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/69770a2e-8c83-4337-acda-a200ddc02068/Screenshot+2025-03-13+at+7.34.16%E2%80%AFPM.png" alt="Microsite 2">
-      </div>
+  <!-- PARTNERSHIPS -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">Partnerships</div>
+      <p class="phase-text">Home Depot partnered with DIY content creators like Simone Giertz to get real reactions to our exclusive Summer DIY shed.</p>
     </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/239b2012-8ebd-46fc-a089-387ffa258e3e/Simone+Giertz+no+bg.jpg" alt="Simone Giertz">
+  </div>
 
-    <div class="closing-line">We didn't just sell materials — we sold the confidence that you could build something worth keeping.</div>
+  <!-- MICROSITE -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">Microsite</div>
+      <p class="phase-text">QR codes lead to the DIY Summer Studio — a site that recognizes photos of furniture and provides instructions and a list of materials to build it, available for purchase at The Home Depot.</p>
+    </div>
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/7298bf21-c94d-4b10-b004-d67dddc1c9e3/Screenshot+2025-03-13+at+7.45.01%E2%80%AFPM.png" alt="Microsite 1">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/69770a2e-8c83-4337-acda-a200ddc02068/Screenshot+2025-03-13+at+7.34.16%E2%80%AFPM.png" alt="Microsite 2">
+    </div>
+  </div>
+
+  <div class="closing-block" style="text-align:center; padding:56px 240px;">
+    <p class="closing-line">We didn't just sell materials — we sold the confidence that you could build something worth keeping.</p>
+  </div>
+
+  <div class="credits-block">
     <div class="credits">Art Direction — Lauren Trujillo, Nick Alfonso</div>
   </div>
 
   <div class="campaign-nav"><a href="roomba.html">← Roomba</a><a href="index.html">Home</a><span></span></div>
+
   <footer class="footer">
     <div class="footer-quote">"Let us prove to the world that good taste, good art and good writing can be good selling."<cite>— Bill Bernbach</cite></div>
     <div class="footer-right">A Tagline Publication<br>© 2026</div>
   </footer>
+
+  <script>
+    const mastheadName = document.getElementById('masthead-name');
+    const campaignHeader = document.getElementById('campaign-header');
+    const campaignNav = document.querySelector('.campaign-nav');
+    const footer = document.querySelector('.footer');
+
+    const footerObserver = new IntersectionObserver(([entry]) => {
+      campaignNav.style.position = entry.isIntersecting ? 'static' : 'sticky';
+    }, { threshold: 0 });
+    footerObserver.observe(footer);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > campaignHeader.offsetTop + campaignHeader.offsetHeight) {
+        mastheadName.classList.add('hidden');
+      } else {
+        mastheadName.classList.remove('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>
