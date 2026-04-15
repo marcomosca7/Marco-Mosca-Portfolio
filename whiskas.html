@@ -5,93 +5,213 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Whiskas — Tagline</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f0ece3;
+      --ink: #111010;
+      --muted: #8a8680;
+      --red: #c0392b;
+      --rule: rgba(17,16,16,0.15);
+      --display: 'Bebas Neue', sans-serif;
+      --serif: 'Libre Baskerville', Georgia, serif;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--serif); min-height: 100vh; overflow-x: hidden; }
+
+    .ticker { background: var(--ink); color: var(--bg); overflow: hidden; white-space: nowrap; padding: 8px 0; font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.14em; }
+    .ticker-track { display: inline-flex; animation: ticker 28s linear infinite; }
+    .ticker-track span { padding: 0 36px; }
+    .ticker-track .sep { color: var(--red); padding: 0; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .masthead { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px 48px; border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--bg); z-index: 50; }
+    .masthead-meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .masthead-name { font-family: var(--display); font-size: 2.8rem; letter-spacing: 0.1em; text-align: center; text-decoration: none; color: var(--ink); transition: opacity 0.3s ease, font-size 0.3s ease; }
+    .masthead-name.hidden { opacity: 0; pointer-events: none; font-size: 0; }
+    .masthead-nav { display: flex; gap: 32px; justify-content: flex-end; list-style: none; }
+    .masthead-nav a { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .masthead-nav a:hover { color: var(--ink); }
+
+    .campaign-header { padding: 64px 80px 56px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: flex-end; }
+    .campaign-num { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 16px; }
+    .campaign-brand { font-family: var(--display); font-size: clamp(5rem, 12vw, 11rem); line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); }
+
+    .campaign-intro { padding: 56px 80px; border-bottom: 1px solid var(--rule); max-width: 1200px; }
+    .campaign-intro p { font-size: 1.05rem; line-height: 1.95; color: var(--ink); opacity: 0.85; margin-bottom: 1.1em; }
+    .campaign-intro p:last-child { margin-bottom: 0; }
+    .campaign-intro strong { font-weight: 700; }
+
+    .phase-block { border-bottom: 1px solid var(--rule); }
+    .phase-header { padding: 40px 80px 24px; }
+    .phase-label { font-family: var(--display); font-size: 0.75rem; letter-spacing: 0.18em; color: var(--red); margin-bottom: 8px; }
+    .phase-heading { font-family: var(--display); font-size: 2rem; letter-spacing: 0.06em; color: var(--ink); margin-bottom: 12px; }
+    .phase-text { font-size: 0.95rem; line-height: 1.85; color: var(--ink); opacity: 0.75; max-width: 860px; }
+    .phase-text-pop { font-size: 1.15rem; line-height: 1.85; color: var(--ink); font-weight: 700; max-width: 860px; }
+
+    .img-full { width: 100%; display: block; padding: 12px 80px; }
+    .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; padding: 12px 80px; gap: 12px; }
+    .img-grid-2 img { width: 100%; display: block; }
+    .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 12px 80px; gap: 12px; }
+    .img-grid-3 img { width: 100%; display: block; }
+
+    /* Typo mosaic: center image large, others around it */
+    .typo-mosaic { display: grid; grid-template-columns: 1fr 2fr 1fr; grid-template-rows: auto auto; padding: 12px 80px; gap: 12px; }
+    .typo-mosaic img { width: 100%; display: block; }
+    .typo-mosaic .typo-center { grid-row: 1 / 3; grid-column: 2; }
+
+    .closing-block { padding: 56px 80px; border-bottom: 1px solid var(--rule); }
+    .closing-line { font-style: italic; font-size: 1.05rem; line-height: 1.85; color: var(--ink); }
+
+    .credits-block { padding: 20px 80px; border-bottom: 1px solid var(--rule); }
+    .credits { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+
+    .campaign-nav { position: sticky; bottom: 0; z-index: 40; background: var(--bg); display: flex; justify-content: space-between; padding: 24px 80px; border-top: 1px solid var(--rule); }
+    .campaign-nav a { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); padding: 10px 20px; transition: background 0.2s, color 0.2s; }
+    .campaign-nav a:hover { background: var(--ink); color: var(--bg); }
+
+    .footer { padding: 28px 80px; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; align-items: center; }
+    .footer-quote { font-style: italic; font-size: 0.72rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+    .footer-quote cite { display: block; font-style: normal; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px; color: var(--red); }
+    .footer-right { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; line-height: 1.8; }
+  </style>
 </head>
 <body>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span><span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span></div></div>
-  <header class="masthead">
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+      <span>NIKE</span><span class="sep">◆</span><span>TUBI</span><span class="sep">◆</span><span>DUOLINGO</span><span class="sep">◆</span><span>WHISKAS</span><span class="sep">◆</span><span>ROOMBA</span><span class="sep">◆</span><span>HOME DEPOT</span><span class="sep">◆</span><span>MARCO MOSCA</span><span class="sep">◆</span><span>COPYWRITER</span><span class="sep">◆</span><span>NEW YORK</span><span class="sep">◆</span>
+    </div>
+  </div>
+
+  <header class="masthead" id="masthead">
     <div class="masthead-meta">Marco Mosca&nbsp;&nbsp;·&nbsp;&nbsp;Copywriter</div>
-    <a class="masthead-name" href="index.html">TAGLINE</a>
+    <a class="masthead-name" id="masthead-name" href="index.html">TAGLINE</a>
     <nav><ul class="masthead-nav"><li><a href="index.html">Work</a></li><li><a href="about.html">About</a></li><li><a href="xfactor.html">X-Factor</a></li></ul></nav>
   </header>
 
-  <section class="campaign-header">
-    <span class="campaign-num">Pg. 15</span>
-    <div class="campaign-brand">WHISKAS</div>
+  <section class="campaign-header" id="campaign-header">
+    <div>
+      <span class="campaign-num">Pg. 15</span>
+      <div class="campaign-brand">WHISKAS</div>
+    </div>
   </section>
 
-  <div class="campaign-body">
-    <div class="intro-text">
-      <p>Our brand is seen as a low-quality cat food option, when in fact cats live long lives on Whiskas. But changing negative perceptions in such a saturated market is near impossible, especially when every brand is competing for attention in the same spaces.</p>
-      <p><strong>So instead, we took our own road.</strong></p>
-    </div>
+  <div class="campaign-intro">
+    <p>Our brand is seen as a low-quality cat food option, when in fact cats live long lives on Whiskas. But changing negative perceptions in such a saturated market is near impossible, especially when every brand is competing for attention in the same spaces.</p>
+    <p><strong>So instead, we took our own road.</strong></p>
+  </div>
 
-    <div class="section-block">
-      <div class="section-label">The Insight</div>
-      <p class="section-text">Cats to cars is such a common autocorrect, pet parents have stopped bothering to fix it entirely.</p>
-      <div class="img-grid-3">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/671f9441-42cc-4173-9639-00f861fdd2e4/typo9.png" alt="Typo example">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/049d3679-7c3c-4015-8da7-56dd81b86c88/typo4.png" alt="Typo example">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/4868e6e1-1e41-4fa2-84b6-9599de2e0d03/typo6.png" alt="Typo example">
-      </div>
-      <div class="img-grid-3">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/1a70e30b-a703-4e1b-833e-2309cc9815d1/typo2.png" alt="Typo example">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/506303e0-d749-460a-afb1-c8c6c148285d/typo10.png" alt="Typo example">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/29f2a608-3649-4629-9cd9-bb93bd575bfb/typo5.png" alt="Typo example">
-      </div>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/8ba82f66-3d34-4301-ba51-3c5e875872ac/typo1.png" alt="Typo example">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c1dd9fb0-daf8-4633-8098-666b10867497/typo7.png" alt="Typo example">
-      </div>
-      <p class="section-text">And if cats are cars... <em>they need fuel.</em></p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/2e09fa19-8918-4785-84bf-efaabb4552b9/KV+W+FOOD.png" alt="Whiskas Purrformance Fuel">
-      <p class="section-text">A limited-edition repackaging that launched a full funnel campaign built to turn typo-traffic into Whiskas traffic. By using Purrformance Fuel to intercept and own the cat-to-car typo, we created a whole new lane that no competitor could follow — and positioned Whiskas as the best cat food for the long run.</p>
+  <!-- THE INSIGHT -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-label">The Insight</div>
+      <p class="phase-text-pop">Cats to cars is such a common autocorrect, pet parents have stopped bothering to fix it entirely.</p>
     </div>
+    <div class="typo-mosaic">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/671f9441-42cc-4173-9639-00f861fdd2e4/typo9.png" alt="Typo example">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/049d3679-7c3c-4015-8da7-56dd81b86c88/typo4.png" alt="Typo example">
+      <img class="typo-center" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/506303e0-d749-460a-afb1-c8c6c148285d/typo10.png" alt="Silly question Reddit post">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/4868e6e1-1e41-4fa2-84b6-9599de2e0d03/typo6.png" alt="Typo example">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/1a70e30b-a703-4e1b-833e-2309cc9815d1/typo2.png" alt="Typo example">
+    </div>
+    <div class="img-grid-3">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/29f2a608-3649-4629-9cd9-bb93bd575bfb/typo5.png" alt="Typo example">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/8ba82f66-3d34-4301-ba51-3c5e875872ac/typo1.png" alt="Typo example">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/c1dd9fb0-daf8-4633-8098-666b10867497/typo7.png" alt="Typo example">
+    </div>
+    <div class="phase-header">
+      <p class="phase-text-pop">So if cats are cars... they need fuel.</p>
+    </div>
+    <div class="phase-header">
+      <p class="phase-label">Introducing:</p>
+    </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/2e09fa19-8918-4785-84bf-efaabb4552b9/KV+W+FOOD.png" alt="Whiskas Purrformance Fuel">
+  </div>
 
-    <div class="section-block">
+  <!-- SEM TAKEOVER -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">01 · Search</div>
       <div class="phase-heading">SEM Takeover</div>
-      <p class="section-text">We began by intercepting the typo at the source. Whenever someone searched "car food," Whiskas owned every sponsored result — putting Purrformance Fuel in front of people the moment they searched.</p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/5a5ac2d2-2a47-4893-8772-89206428fe1c/whiskas+sem+adsBIG.png" alt="Whiskas SEM">
-      <div class="img-grid-3">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/9b0ecb58-5e07-4009-9354-50bb802b4f13/tiktok+car+food+reviews+screen.png" alt="TikTok">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/13f63b09-72b9-4518-89d6-4b43d0090f3d/chewy+ad+1+button.png" alt="Chewy Ad 1">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/a4ffa2d4-11d3-4fff-9066-92d2ec1cc131/Chewy+ad+2+button.png" alt="Chewy Ad 2">
-      </div>
+      <p class="phase-text">We began by intercepting the typo at the source. Whenever someone searched "car food," Whiskas owned every sponsored result — putting Purrformance Fuel in front of people the moment they searched.</p>
     </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/5a5ac2d2-2a47-4893-8772-89206428fe1c/whiskas+sem+adsBIG.png" alt="Whiskas SEM">
+  </div>
 
-    <div class="section-block">
+  <!-- SOCIAL + RETAIL -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">02 · Social + Retail</div>
       <div class="phase-heading">TikTok & Chewy</div>
-      <p class="section-text">We met pet parents everywhere they shop. On TikTok, where our target audience does their research, and on Chewy, where we made sure they took the right exit at the point of purchase.</p>
+      <p class="phase-text">We met pet parents everywhere they shop. On TikTok, where our target audience does their research, and on Chewy, where we made sure they took the right exit at the point of purchase.</p>
     </div>
+    <div class="img-grid-3">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/9b0ecb58-5e07-4009-9354-50bb802b4f13/tiktok+car+food+reviews+screen.png" alt="TikTok">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/13f63b09-72b9-4518-89d6-4b43d0090f3d/chewy+ad+1+button.png" alt="Chewy Ad 1">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/a4ffa2d4-11d3-4fff-9066-92d2ec1cc131/Chewy+ad+2+button.png" alt="Chewy Ad 2">
+    </div>
+  </div>
 
-    <div class="section-block">
+  <!-- TIKTOK FILTER -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">03 · Interactive</div>
       <div class="phase-heading">The TikTok Filter</div>
-      <p class="section-text">Instead of correcting the typo, we rewarded it. Wherever we saw a comment that included "car food" on TikTok, the user received a direct message from @PoweredByWhiskas gifting them an exclusive filter: scan your cat to turn it into the ultimate purrformance machine, and earn real discounts along the way.</p>
-      <div class="img-grid-2">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/b81edb72-819d-4716-a100-d24fc4b55173/TikTok+pre+filter.jpg" alt="TikTok pre-filter">
-        <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/54a9917a-469c-427e-ac17-41545ccc29cd/DM.png" alt="TikTok DM">
-      </div>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/d542a1d8-a762-4b38-bbf7-60739303ba5a/TikTok+filter.jpg" alt="TikTok filter">
+      <p class="phase-text">Instead of correcting the typo, we rewarded it. Wherever we saw a comment that included "car food" on TikTok, the user received a direct message from @PoweredByWhiskas gifting them an exclusive filter: scan your cat to turn it into the ultimate purrformance machine, and earn real discounts along the way.</p>
     </div>
+    <div class="img-grid-2">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/b81edb72-819d-4716-a100-d24fc4b55173/TikTok+pre+filter.jpg" alt="TikTok pre-filter">
+      <img src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/54a9917a-469c-427e-ac17-41545ccc29cd/DM.png" alt="TikTok DM">
+    </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/d542a1d8-a762-4b38-bbf7-60739303ba5a/TikTok+filter.jpg" alt="TikTok filter">
+  </div>
 
-    <div class="section-block">
+  <!-- CAT DEALERSHIPS -->
+  <div class="phase-block">
+    <div class="phase-header">
       <div class="phase-label">04 · Experiential</div>
       <div class="phase-heading">Whiskas Cat Dealerships</div>
-      <p class="section-text">Finally, to create a lasting campaign, we partnered with local shelters to open Whiskas Cat Dealerships — inviting future pet parents to adopt their new car, and go home with the best in-class fuel to help them go the distance.</p>
-      <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/a3f4fe7c-5987-492e-a76a-1bc30d93d504/Car+show.png" alt="Whiskas Cat Dealership">
+      <p class="phase-text">Finally, to create a lasting campaign, we partnered with local shelters to open Whiskas Cat Dealerships — inviting future pet parents to adopt their new car, and go home with the best in-class fuel to help them go the distance.</p>
     </div>
+    <img class="img-full" src="https://images.squarespace-cdn.com/content/v1/67c90996bb19bc22c144ea6c/a3f4fe7c-5987-492e-a76a-1bc30d93d504/Car+show.png" alt="Whiskas Cat Dealership">
+  </div>
 
-    <div class="closing-line">By creating our own lane, we bypassed the noise entirely — turning typo-traffic into proof that Whiskas is the fuel every cat parent needs, for the engine they love. Engineered for the long run.</div>
+  <div class="closing-block" style="text-align:center; padding:56px 240px;">
+    <p class="closing-line">By using Purrformance Fuel to intercept and own the cat-to-car typo, we created a whole new lane that no competitor could follow — and positioned Whiskas as the best cat food for the long run.</p>
+  </div>
+
+  <div class="credits-block">
     <div class="credits">Art Direction — Fiona Henne</div>
   </div>
 
   <div class="campaign-nav"><a href="duolingo.html">← Duolingo</a><a href="index.html">Home</a><a href="roomba.html">Roomba →</a></div>
+
   <footer class="footer">
     <div class="footer-quote">"Let us prove to the world that good taste, good art and good writing can be good selling."<cite>— Bill Bernbach</cite></div>
     <div class="footer-right">A Tagline Publication<br>© 2026</div>
   </footer>
+
+  <script>
+    const mastheadName = document.getElementById('masthead-name');
+    const campaignHeader = document.getElementById('campaign-header');
+    const campaignNav = document.querySelector('.campaign-nav');
+    const footer = document.querySelector('.footer');
+
+    const footerObserver = new IntersectionObserver(([entry]) => {
+      campaignNav.style.position = entry.isIntersecting ? 'static' : 'sticky';
+    }, { threshold: 0 });
+    footerObserver.observe(footer);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > campaignHeader.offsetTop + campaignHeader.offsetHeight) {
+        mastheadName.classList.add('hidden');
+      } else {
+        mastheadName.classList.remove('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>
