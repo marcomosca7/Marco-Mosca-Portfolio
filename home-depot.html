@@ -112,7 +112,7 @@
       <div class="phase-label">Summer Studio Walkthrough</div>
     </div>
     <div class="video-full">
-      <video loop playsinline controls>
+      <video id="walkthrough" loop playsinline controls muted>
         <source src="originals/home-depot/Summer Studio Walkthrough.mp4" type="video/mp4">
       </video>
     </div>
@@ -190,6 +190,13 @@
       campaignNav.style.position = entry.isIntersecting ? 'static' : 'sticky';
     }, { threshold: 0 });
     footerObserver.observe(footer);
+
+    const walkthrough = document.getElementById('walkthrough');
+    const videoObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { walkthrough.play(); }
+      else { walkthrough.pause(); }
+    }, { threshold: 0.3 });
+    videoObserver.observe(walkthrough);
 
     window.addEventListener('scroll', () => {
       if (window.scrollY > campaignHeader.offsetTop + campaignHeader.offsetHeight) {
