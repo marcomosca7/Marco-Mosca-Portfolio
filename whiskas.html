@@ -103,6 +103,15 @@
     <p><strong>So instead, we took our own road.</strong></p>
   </div>
 
+  <!-- CASE STUDY VIDEO -->
+  <div class="phase-block">
+    <div style="padding:12px 80px;">
+      <video id="whiskas-video" style="width:100%; display:block;" loop playsinline controls muted>
+        <source src="COMPRESSEDWHISKAS PURRFORMANCE FUEL CASE STUDY FINAL.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
   <!-- THE INSIGHT -->
   <div class="phase-block">
     <div class="phase-header">
@@ -201,6 +210,13 @@
     const campaignHeader = document.getElementById('campaign-header');
     const campaignNav = document.querySelector('.campaign-nav');
     const footer = document.querySelector('.footer');
+
+    const whiskasVideo = document.getElementById('whiskas-video');
+    const videoObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { whiskasVideo.play(); }
+      else { whiskasVideo.pause(); }
+    }, { threshold: 0.3 });
+    videoObserver.observe(whiskasVideo);
 
     const footerObserver = new IntersectionObserver(([entry]) => {
       campaignNav.style.position = entry.isIntersecting ? 'static' : 'sticky';
